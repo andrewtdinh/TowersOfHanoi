@@ -8,9 +8,9 @@ var colors = ['aquamarine', 'darkorange','blueviolet', 'burlywood', 'cyan', 'gol
 
 function init(){
   $('#start').click(startGame);
-  $('#reset').click(resetGame);
+  $('#reset').click(startGame);
   $('#towers').on('click', '.noSource', select);  //towers div has noSource vs hasSource
-  $('.tower').on('click', '.source', pickUp);   //class source versus target
+  $('.source').click(unSelect);   //class source versus potentialTarget
   $('.tower').on('click', '.target', dropDonut);
 }
 
@@ -21,11 +21,27 @@ function pickUp(){
 function dropDonut(){
 
 }
-function select(){
 
+function unSelect(){
+  $(this).siblings().removeClass('potentialTarget');
+  $(this).removeClass('source');
+  $('#towers').removeClass('hasSource');
+  $('#towers').addClass('noSource');
+}
+function select(){
+  if ($(this).children().length === 0) {
+    return;
+  }
+  $('#towers').removeClass('noSource');
+  $('#towers').addClass('hasSource');
+  $(this).siblings().addClass('potentialTarget');
+  $(this).addClass('source');
 }
 
 function startGame(){
+  if ($('.tower').children().length > 0){
+    $('.tower').removeClass('source');
+    $('.tower').children().remove();}
   numDonuts = 1 * $('#numDonuts').val();
   console.log(numDonuts + 1 - 4);
   var width;
@@ -43,6 +59,7 @@ function startGame(){
     $div.text('R' + (1 + numDonuts - i));
     $('#t1').prepend($div);
   }
+  $('.tower').addClass('noSource');
 }
 
 function resetGame(){
