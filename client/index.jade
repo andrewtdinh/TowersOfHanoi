@@ -2,12 +2,19 @@ doctype html
 html
   head
     meta(charset='utf-8')      
-    title Tower of Hanoi
+    title Towers of Hanoi
     link(rel='stylesheet', href='/vendor/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet', href=isProd ? '/index.min.css' : '/index.css')
     link(rel='shortcut icon', href='/favicon.ico')
   body
-    h1#title Tower of Hanoi
+    h1#title Towers of Hanoi
+    label Numbers of Cylinders
+    input#numCylinder(type='number')
+    button#start Start
+    #towers
+      #t1.tower
+      #t2.tower
+      #t3.tower
 
     script(src='/vendor/jquery/dist/jquery.min.js')
     script(src='/vendor/lodash/lodash.min.js')
