@@ -3,23 +3,43 @@
   margin: 3px;
 }
 
+h1, label {
+  margin: 2% 4% 2% 10%;
+  font-family: 'Megrim', cursive;
+  font-weight: 400;
+  margin: 5% auto 2% auto;
+  text-align: center;
+  color: #6fa0d4;
+  font-style: italic;
+}
+
+#controls, {
+  width: 500px;
+  margin: 0 auto 0 auto;
+  text-align: center;
+}
+
+label, input {
+  width: 40px;
+}
+
+button {
+  width: 100px;
+  display: inline;
+  height: 27px;
+  border-radius: 5px;
+}
+
+body {
+  background-image: url('/assets/body_bg1.jpg');
+  background-repeat: repeat;
+}
+
 #towers {
   width: 660px;
   height: 500px;
   margin: 5% auto 5% auto;
   text-align: center;
-}
-
-#t1{
-  border: 1px dashed red;
-}
-
-#t2{
-  border: 1px dashed green;
-}
-
-#t3{
-  border: 1px dashed blue;
 }
 
 .tower {
@@ -30,6 +50,7 @@
   background-image: url('/assets/rack2.png');
   background-size: 100% 100%;
   position: relative;
+  border: 1px dashed lightblue;
 }
 
 .tower > div {
