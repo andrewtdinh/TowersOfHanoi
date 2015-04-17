@@ -2,7 +2,6 @@
 
 $(document).ready(init);
 
-var $source;
 var numDonuts;
 var colors = ['aquamarine', 'darkorange','blueviolet', 'burlywood', 'cyan', 'gold', 'cornflowerblue', 'darkseagreen', 'aqua', 'peachpuff'];
 
@@ -11,7 +10,6 @@ function init(){
   $('#reset').click(startGame);
   $('#towers').on('click', '.noSource', select);  //tower div has noSource vs source and potentialTarget
   $('#towers').on('click', '.source', unSelect);   //class source versus potentialTarget
-  $('#towers').on('click', '.potentialTarget', transferDonut);
 }
 
 function transferDonut(){
@@ -20,10 +18,11 @@ function transferDonut(){
     $($topRing).detach();
     $($topRing).css('bottom', '9%');
     $(this).prepend($topRing);
-    $('.tower').removeClass('source potentialTarget');
+    $('.tower').removeClass('source'); // potentialTarget');
     $('.tower').addClass('noSource');
   }
   else{
+    debugger;
     var topTargetDonutSize = $($(this).children()[0]).attr('id') * 1;
     var movingDonutSize = $($('.source').children()[0]).attr('id') * 1;
     if (movingDonutSize > topTargetDonutSize) {
@@ -37,33 +36,37 @@ function transferDonut(){
       var bottomMult = 7 * (existingRings - 1) + 9;
       $($topRing).css('bottom', bottomMult + '%');
       $($(this)).prepend($topRing);
-      $('.tower').removeClass('source potentialTarget');
+      $('.tower').removeClass('source'); // potentialTarget');
       $('.tower').addClass('noSource');
     }
   }
 }
 
 function unSelect(){
-  $(this).siblings().removeClass('potentialTarget');
   $(this).removeClass('source');
   $('.tower').addClass('noSource');
 }
+
 function select(){
-  if ($(this).children().length === 0) {
+  if ($('.tower').hasClass('source')){
+    transferDonut($(this));
+  }
+  else if ($(this).children().length === 0) {
     return;
   }
-  $('.tower').removeClass('noSource');
-  $(this).siblings().addClass('potentialTarget');
-  $(this).addClass('source');
+  else {
+    $(this).removeClass('noSource');
+    $(this).siblings().removeClass('source');
+    $(this).addClass('source');
+  }
 }
 
 function startGame(){
   if ($('.tower').children().length > 0){
     $('.tower').children().remove();}
   numDonuts = 1 * $('#numDonuts').val();
-  console.log(numDonuts + 1 - 4);
   var width;
-  var position;
+  // var position;
   for (var i = 1; i<= numDonuts; i++){
     var $div = $('<div>');
     width = 100 - (10 * i);
@@ -79,8 +82,4 @@ function startGame(){
   }
   $('.tower').removeClass('source');
   $('.tower').addClass('noSource');
-}
-
-function resetGame(){
-
 }
