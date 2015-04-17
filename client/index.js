@@ -12,6 +12,12 @@ function init(){
   $('#towers').on('click', '.source', unSelect);   //class source versus potentialTarget
 }
 
+function checkWin(){
+  if (($('#t2').children().length === numDonuts) || ($('#t3').children().length === numDonuts)){
+    alert('Congrats!!! You beat the Leaning Tower of Donuts');
+  }
+}
+
 function transferDonut($target){
   if ($target.children().length === 0) {
     var $topRing = $('.source').children()[0];  //this is ordinary div
@@ -21,11 +27,11 @@ function transferDonut($target){
     $target.prepend($tempRing);
     $('.tower').removeClass('source');
     $('.tower').addClass('noSource');
+    checkWin();
   }
   else{
     var topTargetDonutSize = $($target.children()[0]).attr('id') * 1;
     var movingDonutSize = $($('.source').children()[0]).attr('id') * 1;
-    console.log('source size: ', movingDonutSize, 'target size: ', topTargetDonutSize);
     if (movingDonutSize > topTargetDonutSize) {
       return;
     }
@@ -38,6 +44,7 @@ function transferDonut($target){
       $target.prepend($temporaryRing);
       $('.tower').removeClass('source');
       $('.tower').addClass('noSource');
+      checkWin();
     }
   }
 }
