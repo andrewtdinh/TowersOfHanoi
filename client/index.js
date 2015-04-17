@@ -12,13 +12,14 @@ function init(){
   $('#towers').on('click', '.source', unSelect);   //class source versus potentialTarget
 }
 
-function transferDonut(){
-  if ($(this).children().length === 0) {
-    var $topRing = $('.source').children()[0];
-    $($topRing).detach();
-    $($topRing).css('bottom', '9%');
-    $(this).prepend($topRing);
-    $('.tower').removeClass('source'); // potentialTarget');
+function transferDonut($target){
+  if ($target.children().length === 0) {
+    var $topRing = $('.source').children()[0];  //this is ordinary div
+    var $tempRing = $topRing;
+    $($topRing).remove();
+    $($tempRing).css('bottom', '9%');
+    $target.prepend($tempRing);
+    $('.tower').removeClass('source'); 
     $('.tower').addClass('noSource');
   }
   else{
