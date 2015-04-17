@@ -3,6 +3,7 @@
 $(document).ready(init);
 
 var numDonuts;
+var moveCount = 0;
 var colors = ['aquamarine', 'darkorange','blueviolet', 'burlywood', 'cyan', 'gold', 'cornflowerblue', 'darkseagreen', 'aqua', 'peachpuff'];
 
 function init(){
@@ -10,6 +11,10 @@ function init(){
   $('#reset').click(startGame);
   $('#towers').on('click', '.noSource', select);  //tower div has noSource vs source and potentialTarget
   $('#towers').on('click', '.source', unSelect);   //class source versus potentialTarget
+}
+
+function updateMoveCount(){
+  $('#count').text(moveCount);
 }
 
 function checkWin(){
@@ -27,6 +32,8 @@ function transferDonut($target){
     $target.prepend($tempRing);
     $('.tower').removeClass('source');
     $('.tower').addClass('noSource');
+    moveCount +=1;
+    updateMoveCount();
     checkWin();
   }
   else{
@@ -44,6 +51,8 @@ function transferDonut($target){
       $target.prepend($temporaryRing);
       $('.tower').removeClass('source');
       $('.tower').addClass('noSource');
+      moveCount +=1;
+      updateMoveCount();
       checkWin();
     }
   }
@@ -89,4 +98,6 @@ function startGame(){
   }
   $('.tower').removeClass('source');
   $('.tower').addClass('noSource');
+  moveCount = 0;
+  updateMoveCount();
 }
