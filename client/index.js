@@ -16,28 +16,27 @@ function transferDonut($target){
   if ($target.children().length === 0) {
     var $topRing = $('.source').children()[0];  //this is ordinary div
     var $tempRing = $topRing;
-    $($topRing).remove();
+    $topRing.remove();
     $($tempRing).css('bottom', '9%');
     $target.prepend($tempRing);
-    $('.tower').removeClass('source'); 
+    $('.tower').removeClass('source');
     $('.tower').addClass('noSource');
   }
   else{
-    debugger;
-    var topTargetDonutSize = $($(this).children()[0]).attr('id') * 1;
+    var topTargetDonutSize = $($target.children()[0]).attr('id') * 1;
     var movingDonutSize = $($('.source').children()[0]).attr('id') * 1;
+    console.log('source size: ', movingDonutSize, 'target size: ', topTargetDonutSize);
     if (movingDonutSize > topTargetDonutSize) {
       return;
     }
     else {
-      var $topRing = $($('.source').children()[0]);
-      //var $tempRing = $topRing;
-      $topRing.detach();
-      var existingRings = $(this).children().length;
-      var bottomMult = 7 * (existingRings - 1) + 9;
-      $($topRing).css('bottom', bottomMult + '%');
-      $($(this)).prepend($topRing);
-      $('.tower').removeClass('source'); // potentialTarget');
+      var $upperRing = $($('.source').children()[0]); //this is a jquery object
+      var $temporaryRing = $upperRing;
+      var existingRings = $target.children().length;
+      var bottomMult = 7 * existingRings + 9;
+      $temporaryRing.css('bottom', bottomMult + '%');
+      $target.prepend($temporaryRing);
+      $('.tower').removeClass('source');
       $('.tower').addClass('noSource');
     }
   }
